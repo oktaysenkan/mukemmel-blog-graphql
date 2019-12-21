@@ -25,6 +25,7 @@ export default {
 
       return comments.map(u => ({
         _id: u._id.toString(),
+        post: u.post,
         name: u.name,
         email: u.email,
         content: u.content,
@@ -106,7 +107,8 @@ export default {
   },
   Comment: {
     post: async ({ post }, args, context, info) => {
-      return await Post.findById({ _id: post });
+      console.log(post);
+      return await Post.findById(post);
     }
   }
 };
