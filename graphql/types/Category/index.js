@@ -16,15 +16,6 @@ export default `
     deleteCategory(_id: ID!): Category!
   }
 
-  type Subscription {
-    category(postId: ID!): CategorySubscriptionPayload!
-  }
-
-  type CategorySubscriptionPayload {
-    mutation: MutationType!
-    category: Category!
-  }
-
   input CreateCategoryInput {
     name: String!
     slug: String!

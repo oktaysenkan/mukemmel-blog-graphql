@@ -1,6 +1,8 @@
 import User from "../../../server/models/User";
 import Post from "../../../server/models/Post";
 import Comment from "../../../server/models/Comment";
+import Category from "../../../server/models/Category";
+
 
 import { transformPost } from "../merge";
 
@@ -23,6 +25,7 @@ export default {
         image: u.image,
         views: u.views,
         comments: u.comments,
+        categories: u.categories,
         creationAt: u.creationAt,
       }));
     }
@@ -35,6 +38,7 @@ export default {
         title: post.title,
         details: post.details,
         image: post.image,
+        categories: post.categories
       });
       let createdPost;
       try {
@@ -115,8 +119,11 @@ export default {
     author: async ({ author }, args, context, info) => {
       return await User.findById(author);
     },
-    comments: async ({ author }, args, context, info) => {
-      return await Comment.find({ author });
-    }
+    comments: async ({ comment }, args, context, info) => {
+      return await Comment.find({ comment });
+    },
+    categories: async ({ categories }, args, context, info) => {
+      return await Category.find({ _id: categories });
+    },
   }
 };

@@ -8,6 +8,7 @@ export default `
     image: String!
     views: Int
     comments: [Comment!]!
+    categories: [Category!]!
     createdAt: String
   }
 
@@ -36,6 +37,7 @@ export default `
     slug: String!
     author: ID!
     details: String!
+    categories: [ID]!
     image: String!
   }
   
@@ -46,6 +48,7 @@ export default `
     image: String
     views: Int
     createdAt: String
+    categories: [ID]
   }
 
   enum MutationType {

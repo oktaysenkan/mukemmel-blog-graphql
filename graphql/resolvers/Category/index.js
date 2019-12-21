@@ -49,11 +49,4 @@ export default {
       });
     }
   },
-  Subscription: {
-    category: {
-      subscribe: (parent, args, { pubsub }) => {
-        //return pubsub.asyncIterator(channel)
-      }
-    }
-  }
 };
