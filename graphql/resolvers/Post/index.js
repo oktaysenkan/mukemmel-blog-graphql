@@ -82,6 +82,7 @@ export default {
           creator.posts.splice(creatorIndex, 1);
         }
         await creator.save();
+
         const comment = await User.findById(post.comment);
         if (!comment) {
           throw new Error("Comment not found.");
@@ -91,6 +92,7 @@ export default {
           comment.posts.splice(commentPostIndex, 1);
         }
         await comment.save();
+        
         return new Promise((resolve, reject) => {
           Post.findByIdAndDelete(_id).exec((err, res) => {
             err ? reject(err) : resolve(res);

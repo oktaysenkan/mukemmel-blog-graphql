@@ -28,8 +28,9 @@ const CommentSchema = new Schema({
     type: String,
     required: true,
   },
-  verifies: {
+  verified: {
     type: Boolean,
+    default: false,
   },
 });
 
