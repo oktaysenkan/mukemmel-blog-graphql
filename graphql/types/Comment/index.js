@@ -11,7 +11,7 @@ export default `
 
   type Query {
     comment(_id: ID!): [Comment!]!
-    comments: [Comment!]!
+    comments(skip: Int, count: Int): [Comment!]!
   }
 
   type Mutation {

@@ -7,7 +7,7 @@ export default `
 
   type Query {
     user(_id: ID!): User!
-    users: [User!]!
+    users(skip: Int, count: Int): [User!]!
   }
 
   type Mutation {

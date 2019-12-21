@@ -6,10 +6,24 @@ export default {
     user: async (parent, { _id }, context, info) => {
       return await User.findOne({ _id }).exec();
     },
-    users: async (parent, args, context, info) => {
-      const users = await User.find({})
+    users: async (parent, { skip, count }, context, info) => {
+      let users = await User.find({})
         .populate()
         .exec();
+
+      if (skip) {
+        users = users.splice(skip, users.length);
+      }
+
+      if (count) {
+        users = users.splice(0, count);
+      } else {
+        users = users.splice(0, 10);
+      }
+      
+      if (!users.length) {
+        throw new Error('Users not found.')
+      }
 
       return users.map(u => ({
         _id: u._id.toString(),

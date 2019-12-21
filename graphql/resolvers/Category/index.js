@@ -5,12 +5,26 @@ export default {
     category: async (parent, { _id }, context, info) => {
       return await Category.find({ _id });
     },
-    categories: async (parent, args, context, info) => {
-      const res = await Category.find({})
+    categories: async (parent, { skip, count }, context, info) => {
+      let categories = await Category.find({})
         .populate()
         .exec();
+      
+      if (skip) {
+        categories = categories.splice(skip, categories.length);
+      }
 
-      return res.map(u => ({
+      if (count) {
+        categories = categories.splice(0, count);
+      } else {
+        categories = categories.splice(0, 10);
+      }
+      
+      if (!categories.length) {
+        throw new Error('Categories not found.')
+      }
+
+      return categories.map(u => ({
         _id: u._id.toString(),
         slug: u.slug,
         name: u.name,

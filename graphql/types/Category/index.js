@@ -7,7 +7,7 @@ export default `
 
   type Query {
     category(_id: ID!): [Category!]!
-    categories: [Category!]!
+    categories(skip: Int, count: Int): [Category!]!
   }
 
   type Mutation {

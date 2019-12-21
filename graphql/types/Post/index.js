@@ -14,7 +14,7 @@ export default `
 
   type Query {
     post(_id: ID!): Post!
-    posts: [Post!]!
+    posts(skip: Int, count: Int): [Post!]!
     postsByCategory(categorySlug: String!): [Post!]!
     postBySlug(slug: String!): Post!
   }

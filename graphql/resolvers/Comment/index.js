@@ -6,12 +6,26 @@ export default {
     comment: async (parent, { _id }, context, info) => {
       return await Comment.find({ _id });
     },
-    comments: async (parent, args, context, info) => {
-      const res = await Comment.find({})
+    comments: async (parent, { skip, count }, context, info) => {
+      let comments = await Comment.find({})
         .populate()
         .exec();
 
-      return res.map(u => ({
+      if (skip) {
+        comments = comments.splice(skip, comments.length);
+      }
+
+      if (count) {
+        comments = comments.splice(0, count);
+      } else {
+        comments = comments.splice(0, 10);
+      }
+      
+      if (!comments.length) {
+        throw new Error('Comments not found.')
+      }
+
+      return comments.map(u => ({
         _id: u._id.toString(),
         name: u.name,
         email: u.email,

@@ -10,12 +10,25 @@ export default {
     post: async (parent, { _id }, context, info) => {
       return await Post.findOne({ _id }).exec();
     },
-    posts: async (parent, args, context, info) => {
-      const post = await Comment.find({})
-        .populate()
-        .exec();
+    posts: async (parent, { skip, count }, context, info) => {
+      let posts = await Post.find({})
+        .populate().exec();
 
-      return post.map(u => ({
+      if (skip) {
+        posts = posts.splice(skip, posts.length);
+      }
+
+      if (count) {
+        posts = posts.splice(0, count);
+      } else {
+        posts = posts.splice(0, 10);
+      }
+      
+      if (!posts.length) {
+        throw new Error('Posts not found.')
+      }
+
+      return posts.map(u => ({
         _id: u._id.toString(),
         slug: u.slug,
         author: u.author,
