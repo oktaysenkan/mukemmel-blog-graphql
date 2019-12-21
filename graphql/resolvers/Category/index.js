@@ -3,12 +3,10 @@ import Category from "../../../server/models/Category";
 export default {
   Query: {
     category: async (parent, { _id }, context, info) => {
-      return await Category.find({ _id });
+      return await Category.findById({ _id });
     },
     categories: async (parent, { skip, count }, context, info) => {
-      let categories = await Category.find({})
-        .populate()
-        .exec();
+      let categories = await Category.find({}).populate().exec();
       
       if (skip) {
         categories = categories.splice(skip, categories.length);

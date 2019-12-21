@@ -4,12 +4,10 @@ import Comment from "../../../server/models/Comment";
 export default {
   Query: {
     comment: async (parent, { _id }, context, info) => {
-      return await Comment.find({ _id });
+      return await Comment.findById({ _id });
     },
     comments: async (parent, { skip, count }, context, info) => {
-      let comments = await Comment.find({})
-        .populate()
-        .exec();
+      let comments = await Comment.find({}).populate().exec();
 
       if (skip) {
         comments = comments.splice(skip, comments.length);

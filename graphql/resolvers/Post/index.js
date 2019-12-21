@@ -8,11 +8,10 @@ import { transformPost } from "../merge";
 export default {
   Query: {
     post: async (parent, { _id }, context, info) => {
-      return await Post.findOne({ _id }).exec();
+      return await Post.findById({ _id }).exec();
     },
     posts: async (parent, { skip, count }, context, info) => {
-      let posts = await Post.find({})
-        .populate().exec();
+      let posts = await Post.find({}).populate().exec();
 
       if (skip) {
         posts = posts.splice(skip, posts.length);
@@ -23,7 +22,7 @@ export default {
       } else {
         posts = posts.splice(0, 10);
       }
-      
+
       if (!posts.length) {
         throw new Error('Posts not found.')
       }

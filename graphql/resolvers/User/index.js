@@ -7,9 +7,7 @@ export default {
       return await User.findOne({ _id }).exec();
     },
     users: async (parent, { skip, count }, context, info) => {
-      let users = await User.find({})
-        .populate()
-        .exec();
+      let users = await User.find({}).populate().exec();
 
       if (skip) {
         users = users.splice(skip, users.length);

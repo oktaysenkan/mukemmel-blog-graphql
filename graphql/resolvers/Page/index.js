@@ -3,7 +3,7 @@ import Page from "../../../server/models/Page";
 export default {
   Query: {
     page: async (parent, { _id }, context, info) => {
-      return await Page.findOne({ _id }).exec();
+      return await Page.findById({ _id }).exec();
     },
     pages: async (parent, { skip, count }, context, info) => {
       let pages = await Page.find({}).populate().exec();
@@ -28,7 +28,16 @@ export default {
         slug: u.slug,
         content: u.content,
       }));
-    }
+    },
+    pageBySlug: async (parent, { slug }, context, info) => {
+      const page = await Page.findOne({ slug: slug }).exec();
+
+      if (!page) {
+        throw new Error('Page not found.')
+      }
+
+      return page;
+    },
   },
   Mutation: {
     createPage: async (parent, { page }, context, info) => {
