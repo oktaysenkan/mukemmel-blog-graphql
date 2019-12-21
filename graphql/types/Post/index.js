@@ -6,6 +6,7 @@ export default `
     title: String!
     details: String!
     image: String!
+    views: Int
     comments: [Comment!]!
     createdAt: String
   }
@@ -36,7 +37,6 @@ export default `
     author: ID!
     details: String!
     image: String!
-    createdAt: String!
   }
   
   input UpdatePostInput {
@@ -44,6 +44,7 @@ export default `
     slug: String
     details: String
     image: String
+    views: Int
     createdAt: String
   }
 

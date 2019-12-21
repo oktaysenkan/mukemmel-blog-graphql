@@ -31,7 +31,7 @@ const PostSchema = new Schema({
   },
   views: {
     type: Number,
-    required: true,
+    default: 0,
   },
   comments: [
     {

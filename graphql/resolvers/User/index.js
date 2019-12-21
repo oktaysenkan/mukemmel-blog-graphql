@@ -1,6 +1,5 @@
 import User from "../../../server/models/User";
 import Post from "../../../server/models/Post";
-import Comment from "../../../server/models/Comment";
 
 export default {
   Query: {

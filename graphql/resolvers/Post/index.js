@@ -21,7 +21,6 @@ export default {
         title: u.title,
         details: u.details,
         image: u.image,
-        categories: u.categories,
         views: u.views,
         comments: u.comments,
         creationAt: u.creationAt,
@@ -36,10 +35,6 @@ export default {
         title: post.title,
         details: post.details,
         image: post.image,
-        categories: post.categories,
-        views: post.views,
-        comments: post.comments,
-        creationAt: post.creationAt,
       });
       let createdPost;
       try {
@@ -55,6 +50,8 @@ export default {
         if (!creator) {
           throw new Error("User not found.");
         }
+        console.log(createdPost);
+        
         creator.posts.push(newPost);
         await creator.save();
         return createdPost;
@@ -78,7 +75,7 @@ export default {
         const post = await Post.findById(_id);
         const creator = await User.findById(post.author);
         if (!creator) {
-          throw new Error("user not found.");
+          throw new Error("User not found.");
         }
         const index = creator.posts.indexOf(_id);
         if (index > -1) {

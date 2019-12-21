@@ -13,7 +13,7 @@ const options = {
   port: process.env.PORT || "4000",
   endpoint: "/graphql",
   subscriptions: "/subscriptions",
-  playground: "/playground"
+  playground: "/"
 };
 
 const context = {
@@ -39,5 +39,5 @@ const server = new GraphQLServer({
 });
 
 server.start(options, ({ port }) => {
-  console.log(`🚀 Server is running on http://localhost:${port}`);
+  console.log("\x1b[32m",`Server is running on http://localhost:${port}`);
 });
