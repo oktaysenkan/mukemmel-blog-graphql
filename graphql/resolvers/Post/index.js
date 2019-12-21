@@ -77,11 +77,20 @@ export default {
         if (!creator) {
           throw new Error("User not found.");
         }
-        const index = creator.posts.indexOf(_id);
-        if (index > -1) {
-          creator.posts.splice(index, 1);
+        const creatorIndex = creator.posts.indexOf(_id);
+        if (creatorIndex > -1) {
+          creator.posts.splice(creatorIndex, 1);
         }
         await creator.save();
+        const comment = await User.findById(post.comment);
+        if (!comment) {
+          throw new Error("Comment not found.");
+        }
+        const commentPostIndex = comment.posts.indexOf(_id);
+        if (commentPostIndex > -1) {
+          comment.posts.splice(commentPostIndex, 1);
+        }
+        await comment.save();
         return new Promise((resolve, reject) => {
           Post.findByIdAndDelete(_id).exec((err, res) => {
             err ? reject(err) : resolve(res);
