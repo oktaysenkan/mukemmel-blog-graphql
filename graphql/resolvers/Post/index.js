@@ -3,7 +3,6 @@ import Post from "../../../server/models/Post";
 import Comment from "../../../server/models/Comment";
 import Category from "../../../server/models/Category";
 
-
 import { transformPost } from "../merge";
 
 export default {
@@ -12,11 +11,35 @@ export default {
       return await Post.findOne({ _id }).exec();
     },
     posts: async (parent, args, context, info) => {
-      const res = await Post.find({})
+      const post = await Comment.find({})
         .populate()
         .exec();
 
-      return res.map(u => ({
+      return post.map(u => ({
+        _id: u._id.toString(),
+        slug: u.slug,
+        author: u.author,
+        title: u.title,
+        details: u.details,
+        image: u.image,
+        views: u.views,
+        comments: u.comments,
+        categories: u.categories,
+        creationAt: u.creationAt,
+      }));
+    },
+    postByCategory: async (parent, { categorySlug }, context, info) => {
+      const category = await Category.findOne({slug: categorySlug});
+
+      if (!category) {
+        throw new Error("Category not found.");
+      }
+
+      const post = await Post.find({categories: category})
+        .populate()
+        .exec();
+
+      return post.map(u => ({
         _id: u._id.toString(),
         slug: u.slug,
         author: u.author,
