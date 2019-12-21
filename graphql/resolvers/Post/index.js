@@ -132,8 +132,8 @@ export default {
     author: async ({ author }, args, context, info) => {
       return await User.findById(author);
     },
-    comments: async ({ comments }, args, context, info) => {
-      return await Comment.find({ _id: comments });
+    comments: async ({ _id }, args, context, info) => {
+      return await Comment.find({ post: _id });
     },
     categories: async ({ categories }, args, context, info) => {
       return await Category.find({ _id: categories });

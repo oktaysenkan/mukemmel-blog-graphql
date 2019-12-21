@@ -59,9 +59,7 @@ export default {
         if (!post) {
           throw new Error("Post not found.");
         }
-        
-        post.comments.push(newComment);
-        await post.save();
+
         return result
       } catch (error) {
         throw error
@@ -107,7 +105,6 @@ export default {
   },
   Comment: {
     post: async ({ post }, args, context, info) => {
-      console.log(post);
       return await Post.findById(post);
     }
   }
