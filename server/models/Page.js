@@ -12,7 +12,7 @@ const PageSchema = new Schema({
     type: String,
     required: true,
   },
-  title: {
+  slug: {
     type: String,
     required: true,
   },

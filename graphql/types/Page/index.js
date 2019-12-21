@@ -2,7 +2,7 @@ export default `
   type Page {
     _id: ID!
     slug: String!
-    name: User!
+    name: String!
     content: String!
   }
 
@@ -21,14 +21,14 @@ export default `
   input CreatePageInput {
     title: String!
     slug: String!
-    name: User!
+    name: String!
     content: String!
   }
   
   input UpdatePageInput {
     title: String
     slug: String
-    name: User
+    name: String
     content: String
   }
 
