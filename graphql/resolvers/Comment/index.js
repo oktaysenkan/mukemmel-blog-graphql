@@ -48,24 +48,20 @@ export default {
       });
 
       try {
-        const result = new Promise((resolve, reject) => {
-          newComment.save((err, res) => {
-            err ? reject(err) : resolve(res);
-          });
-        });
-  
         const post = await Post.findById(comment.post);
 
         if (!post) {
           throw new Error("Post not found.");
         }
 
-        return result
+        return result = new Promise((resolve, reject) => {
+          newComment.save((err, res) => {
+            err ? reject(err) : resolve(res);
+          });
+        });
       } catch (error) {
         throw error
       }
-
-
     },
     updateComment: async (parent, { _id, comment }, context, info) => {
       return new Promise((resolve, reject) => {
@@ -79,16 +75,6 @@ export default {
       });
     },
     deleteComment: async (parent, { _id }, context, info) => {
-      const comment = await Comment.findById(_id);
-      const post = await Post.findById(comment.post);
-      if (!post) {
-        throw new Error("Post not found.");
-      }
-      const index = post.comments.indexOf(_id);
-      if (index > -1) {
-        post.comments.splice(index, 1);
-      }
-      await post.save();
       return new Promise((resolve, reject) => {
         Comment.findByIdAndDelete(_id).exec((err, res) => {
           err ? reject(err) : resolve(res);

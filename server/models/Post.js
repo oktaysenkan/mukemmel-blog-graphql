@@ -39,12 +39,6 @@ const PostSchema = new Schema({
       ref: "Category"
     }
   ],
-  comments: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Comment"
-    }
-  ],
   createdAt: {
     type: Date,
     default: Date.now()
