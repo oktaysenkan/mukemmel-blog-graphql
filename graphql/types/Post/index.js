@@ -15,7 +15,8 @@ export default `
   type Query {
     post(_id: ID!): Post!
     posts: [Post!]!
-    postByCategory(categorySlug: String!): [Post!]!
+    postsByCategory(categorySlug: String!): [Post!]!
+    postBySlug(slug: String!): Post!
   }
 
   type Mutation {

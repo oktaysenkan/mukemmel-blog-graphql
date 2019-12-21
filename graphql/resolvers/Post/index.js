@@ -28,14 +28,14 @@ export default {
         creationAt: u.creationAt,
       }));
     },
-    postByCategory: async (parent, { categorySlug }, context, info) => {
+    postsByCategory: async (parent, { categorySlug }, context, info) => {
       const category = await Category.findOne({slug: categorySlug});
 
       if (!category) {
         throw new Error("Category not found.");
       }
 
-      const post = await Post.find({categories: category})
+      const post = await Post.find({ categories: category })
         .populate()
         .exec();
 
@@ -51,6 +51,15 @@ export default {
         categories: u.categories,
         creationAt: u.creationAt,
       }));
+    },
+    postBySlug: async (parent, { slug }, context, info) => {
+      const post = await Post.findOne({ slug: slug }).exec();
+
+      if (!post) {
+        throw new Error('Post not found.')
+      }
+
+      return post;
     }
   },
   Mutation: {
