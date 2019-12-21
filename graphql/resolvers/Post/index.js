@@ -84,29 +84,12 @@ export default {
         image: post.image,
         categories: post.categories
       });
-      let createdPost;
-      try {
-        // const result = await newPost.save();
-        const result = await new Promise((resolve, reject) => {
-         newPost.save((err, res) => {
-            err ? reject(err) : resolve(res);
-          });
-        });
-        createdPost = transformPost(result);
-        const creator = await User.findById(post.author);
 
-        if (!creator) {
-          throw new Error("User not found.");
-        }
-        console.log(createdPost);
-        
-        creator.posts.push(newPost);
-        await creator.save();
-        return createdPost;
-      } catch (error) {
-        console.log(error);
-        throw error;
-      }
+      return await new Promise((resolve, reject) => {
+        newPost.save((err, res) => {
+          err ? reject(err) : resolve(res);
+        });
+      });
     },
     updatePost: async (parent, { _id, post }, context, info) => {
       return new Promise((resolve, reject) => {
@@ -119,27 +102,13 @@ export default {
     },
     deletePost: async (parent, { _id }, context, info) => {
       try {
-        // searching for creator of the post and deleting it from the list
         const post = await Post.findById(_id);
-        const creator = await User.findById(post.author);
-        if (!creator) {
-          throw new Error("User not found.");
+        const comments = await Comment.find({_id: post.comments}).exec();
+        if (comments) {
+          comments.forEach(comment => {
+            Comment.findByIdAndDelete(comment._id).exec();
+          })
         }
-        const creatorIndex = creator.posts.indexOf(_id);
-        if (creatorIndex > -1) {
-          creator.posts.splice(creatorIndex, 1);
-        }
-        await creator.save();
-
-        const comment = await User.findById(post.comment);
-        if (!comment) {
-          throw new Error("Comment not found.");
-        }
-        const commentPostIndex = comment.posts.indexOf(_id);
-        if (commentPostIndex > -1) {
-          comment.posts.splice(commentPostIndex, 1);
-        }
-        await comment.save();
         
         return new Promise((resolve, reject) => {
           Post.findByIdAndDelete(_id).exec((err, res) => {
@@ -163,8 +132,8 @@ export default {
     author: async ({ author }, args, context, info) => {
       return await User.findById(author);
     },
-    comments: async ({ comment }, args, context, info) => {
-      return await Comment.find({ comment });
+    comments: async ({ comments }, args, context, info) => {
+      return await Comment.find({ _id: comments });
     },
     categories: async ({ categories }, args, context, info) => {
       return await Category.find({ _id: categories });
