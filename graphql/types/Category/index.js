@@ -3,6 +3,7 @@ export default `
     _id: ID!
     name: String!
     slug: String!
+    posts: [Post!]!
   }
 
   type Query {

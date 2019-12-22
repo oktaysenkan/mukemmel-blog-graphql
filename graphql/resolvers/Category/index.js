@@ -1,4 +1,5 @@
 import Category from "../../../server/models/Category";
+import Post from "../../../server/models/Post";
 
 export default {
   Query: {
@@ -61,4 +62,9 @@ export default {
       });
     }
   },
+  Category: {
+    posts: async ({ _id }, args, context, info) => {
+      return await Post.find({categories: _id});
+    }
+  }
 };
