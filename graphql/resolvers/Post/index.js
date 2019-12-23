@@ -3,15 +3,23 @@ import Post from "../../../server/models/Post";
 import Comment from "../../../server/models/Comment";
 import Category from "../../../server/models/Category";
 
-import { transformPost } from "../merge";
-
 export default {
   Query: {
     post: async (parent, { _id }, context, info) => {
       return await Post.findById({ _id }).exec();
     },
-    posts: async (parent, { skip, count }, context, info) => {
+    posts: async (parent, { skip, count, orderBy }, context, info) => {
       let posts = await Post.find({}).populate().exec();
+
+      if (orderBy) {
+        posts = posts.sort((a, b) => {
+          if (orderBy.direction === "ASC") {
+            return a[orderBy.field].localeCompare(b[orderBy.field]);
+          } else if (orderBy.direction === "DESC") {
+            return b[orderBy.field].localeCompare(a[orderBy.field]);
+          }
+        });
+      }
 
       if (skip) {
         posts = posts.splice(skip, posts.length);

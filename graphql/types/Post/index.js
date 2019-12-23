@@ -14,7 +14,7 @@ export default `
 
   type Query {
     post(_id: ID!): Post!
-    posts(skip: Int, count: Int): [Post!]!
+    posts(skip: Int, count: Int, orderBy: OrderPostInput): [Post!]!
     postsByCategory(categorySlug: String!): [Post!]!
     postBySlug(slug: String!): Post!
   }
@@ -51,6 +51,11 @@ export default `
     views: Int
     createdAt: String
     categories: [ID]
+  }
+
+  input OrderPostInput {
+    field: String!
+    direction: String!
   }
 
   enum MutationType {
