@@ -30,7 +30,8 @@ mongoose
     db,
     {
       useCreateIndex: true,
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     }
   )
   .then(() => console.log("MongoDB connected"))
