@@ -54,7 +54,7 @@ export default {
           throw new Error("Post not found.");
         }
 
-        return result = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
           newComment.save((err, res) => {
             err ? reject(err) : resolve(res);
           });

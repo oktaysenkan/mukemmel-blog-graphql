@@ -40,7 +40,7 @@ export default {
         slug: u.slug,
         author: u.author,
         title: u.title,
-        details: u.details,
+        details: `${u.details.substring(0, 320)}...`,
         image: u.image,
         views: u.views,
         comments: u.comments,
@@ -55,16 +55,18 @@ export default {
         throw new Error("Category not found.");
       }
 
-      const post = await Post.find({ categories: category })
-        .populate()
-        .exec();
+      const posts = await Post.find({ categories: category }).populate().exec();
 
-      return post.map(u => ({
+      if (!posts.length) {
+        throw new Error('Posts not found.')
+      }
+
+      return posts.map(u => ({
         _id: u._id.toString(),
         slug: u.slug,
         author: u.author,
         title: u.title,
-        details: u.details,
+        details: `${u.details.substring(0, 320)}...`,
         image: u.image,
         views: u.views,
         comments: u.comments,

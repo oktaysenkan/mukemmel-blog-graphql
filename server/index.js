@@ -4,16 +4,19 @@ import mongoose from "mongoose";
 
 import schema from "../graphql/";
 import { models } from "./config/db/";
+import config from "../config/config";
 
 const { mongoURI: db } = process.env;
+
+console.log();
 
 const pubsub = new PubSub();
 
 const options = {
   port: process.env.PORT || "4000",
-  endpoint: "/graphql",
+  endpoint: config.GRAPHQL_ENDPONT,
   subscriptions: "/subscriptions",
-  playground: "/"
+  playground: config.PLAYGROUND
 };
 
 const context = {
