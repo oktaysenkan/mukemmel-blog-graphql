@@ -9,7 +9,7 @@ export default `
     views: Int
     comments: [Comment!]!
     categories: [Category!]!
-    createdAt: String
+    creationAt: String
   }
 
   type Query {
@@ -49,7 +49,7 @@ export default `
     details: String
     image: String
     views: Int
-    createdAt: String
+    creationAt: String
     categories: [ID]
   }
 

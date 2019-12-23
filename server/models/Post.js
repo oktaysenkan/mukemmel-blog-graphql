@@ -39,7 +39,7 @@ const PostSchema = new Schema({
       ref: "Category"
     }
   ],
-  createdAt: {
+  creationAt: {
     type: Date,
     default: Date.now()
   },
