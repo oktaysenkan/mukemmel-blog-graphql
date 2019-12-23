@@ -14,9 +14,9 @@ export default {
       if (orderBy) {
         posts = posts.sort((a, b) => {
           if (orderBy.direction === "ASC") {
-            return a[orderBy.field].localeCompare(b[orderBy.field]);
+            return a[orderBy.field].toString().localeCompare(b[orderBy.field].toString());
           } else if (orderBy.direction === "DESC") {
-            return b[orderBy.field].localeCompare(a[orderBy.field]);
+            return b[orderBy.field].toString().localeCompare(a[orderBy.field].toString());
           }
         });
       }
