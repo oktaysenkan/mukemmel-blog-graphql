@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { ObjectID } from "mongodb";
+var moment = require('moment');
 
 const Schema = mongoose.Schema;
 
@@ -41,7 +42,7 @@ const PostSchema = new Schema({
   ],
   creationAt: {
     type: Date,
-    default: Date.now()
+    default: moment.utc().valueOf()
   },
 });
 
