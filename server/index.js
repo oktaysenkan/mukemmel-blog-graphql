@@ -4,7 +4,6 @@ import mongoose from "mongoose";
 
 import schema from "../graphql/";
 import { models } from "./config/db/";
-import config from "../config/config";
 
 const { mongoURI: db } = process.env;
 
@@ -14,9 +13,9 @@ const pubsub = new PubSub();
 
 const options = {
   port: process.env.PORT || "4000",
-  endpoint: config.GRAPHQL_ENDPONT,
+  endpoint: process.env.GRAPHQL_ENDPONT,
   subscriptions: "/subscriptions",
-  playground: config.PLAYGROUND
+  playground: process.env.PLAYGROUND
 };
 
 const context = {
@@ -24,7 +23,6 @@ const context = {
   pubsub
 };
 
-// Connect to MongoDB with Mongoose.
 mongoose
   .connect(
     db,

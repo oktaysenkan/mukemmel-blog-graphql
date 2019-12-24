@@ -1,15 +1,5 @@
-<h1 align="center">
-<br>
-GraphQL MongoDB Server
-</h1>
-
+# GraphQL MongoDB Server
 A server using GraphQL and MongoDB for [mukemmel-blog](https://github.com/oktaysenkan/mukemmel-blog) app.
-
-<hr />
-
-## Introduction
-
-This is a server boilerplate using GraphQL and MongoDB. Support subscriptions using GraphQL Yoga. 
 
 ## Getting started
 
@@ -20,3 +10,15 @@ This is a server boilerplate using GraphQL and MongoDB. Support subscriptions us
 ## Commands
 
 - `npm start` - start the playground at `http://localhost:4000/`
+
+## Config
+
+```
+###################################
+Set this file and copy it into .env
+###################################
+mongoURI=mongodb+srv://server.example.com/
+PORT=4000
+PLAYGROUND=/playground
+GRAPHQL_ENDPONT=/graphql
+```

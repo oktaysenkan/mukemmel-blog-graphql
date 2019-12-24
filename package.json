@@ -1,7 +1,7 @@
 {
-  "name": "graphql-mongodb-server",
+  "name": "mukemmel-blog-graphql",
   "version": "1.0.0",
-  "description": "A GraphQL MongoDB server.",
+  "description": "mukemmel-blog GraphQL server",
   "main": "index.js",
   "scripts": {
     "start": "npm run server -p $PORT",
@@ -13,7 +13,7 @@
     "boilerplate",
     "server"
   ],
-  "author": "Leonardo Maldonado <leonardomso11@gmail.com>",
+  "author": "Oktay Şenkan <oktay.senkan@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.7.7",
