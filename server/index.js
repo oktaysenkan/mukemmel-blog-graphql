@@ -7,8 +7,6 @@ import { models } from "./config/db/";
 
 const { mongoURI: db } = process.env;
 
-console.log();
-
 const pubsub = new PubSub();
 
 const options = {
