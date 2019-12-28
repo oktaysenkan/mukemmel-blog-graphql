@@ -27,11 +27,9 @@ export default {
         _id: u._id.toString(),
         post: u.post,
         name: u.name,
-        email: u.email,
         content: u.content,
-        website: u.website,
-        email: u.email,
         verified: u.verified,
+        creationAt: u.creationAt,
       }));
     }
   },
@@ -40,11 +38,9 @@ export default {
       const newComment = await new Comment({
         post: comment.post,
         name: comment.name,
-        email: comment.email,
         content: comment.content,
-        website: comment.website,
-        email: comment.email,
         verified: comment.verified,
+        creationAt: comment.creationAt,
       });
 
       try {

@@ -3,10 +3,9 @@ export default `
     _id: ID!
     post: Post!
     name: String!
-    email: String!
     content: String!
-    website: String!
     verified: String!
+    creationAt: String!
   }
 
   type Query {
@@ -32,16 +31,13 @@ export default `
   input CreateCommentInput {
     post: ID!
     name: String!
-    email: String!
     content: String!
-    website: String!
   }
   
   input UpdateCommentInput {
     name: String
-    email: String
     content: String
-    website: String
+    verified: String
   }
 
   enum MutationType {

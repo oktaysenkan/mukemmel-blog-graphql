@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { ObjectID } from "mongodb";
+var moment = require('moment');
 
 const Schema = mongoose.Schema;
 
@@ -16,21 +17,17 @@ const CommentSchema = new Schema({
     type: String,
     required: true,
   },
-  email: {
-    type: String,
-    required: true,
-  },
   content: {
-    type: String,
-    required: true,
-  },
-  website: {
     type: String,
     required: true,
   },
   verified: {
     type: Boolean,
     default: false,
+  },
+  creationAt: {
+    type: Date,
+    default: moment.utc().valueOf()
   },
 });
 
